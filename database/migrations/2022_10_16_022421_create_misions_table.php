@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('misions', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre', 30);
+            $table->integer('cuota');
+            $table->integer('recompensa');
+            $table->string('rango', 10);
+            $table->string('descripcion', 400);
+            $table->unsignedBigInteger('mapa');
+            $table->foreign('mapa')->references('id')->on('mapas');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('misions');
+    }
+};
